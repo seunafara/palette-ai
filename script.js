@@ -1,10 +1,9 @@
-import previousTraining from './trainingData.js';
+import AI from './AI.js';
+import trainingData from "./trainingData.js"
 
-const net = new brain.NeuralNetwork();
+const ai = new AI(trainingData).train()
 
-const trainingData = previousTraining;
-
-net.train(trainingData);
+// console.log(ai);
 
 const primaryColorEl = document.getElementById("primary-color");
 const secondaryColorEl = document.getElementById("secondary-color");
@@ -59,12 +58,14 @@ const tertiaryColors = [
   "139,105,20",
   "149, 165, 166",
   "245, 245, 220",
+  "0 0 0",
   "0,255,0",
   "128,0,128",
   "254,251,234",
   "255,192,203",
   "255,69,0",
   "5,195,221",
+  "255 255 255"
 ];
 
 const textColors = ["0, 0, 0", "255, 255, 255"];
@@ -88,54 +89,54 @@ const generate = () => {
 
   match = [...primaryColor, ...secondaryColor, ...tertiaryColor, ...textColor];
 
-  const guess = net.run(match)[0];
+  const guess = ai.net.run(match)[0];
 
   if (guess > 0.5) {
-    primaryColorEl.style.backgroundColor = `rgba(${convertRGB(
-      primaryColor,
-      false
-    ).toString()})`;
+		primaryColorEl.style.backgroundColor = `rgba(${convertRGB(
+			primaryColor,
+			false,
+		).toString()})`
 
-    secondaryColorEl.style.backgroundColor = `rgba(${convertRGB(
-      secondaryColor,
-      false
-    ).toString()})`;
+		secondaryColorEl.style.backgroundColor = `rgba(${convertRGB(
+			secondaryColor,
+			false,
+		).toString()})`
 
-    tertiaryColorEl.style.backgroundColor = `rgba(${convertRGB(
-      tertiaryColor,
-      false
-    ).toString()})`;
+		tertiaryColorEl.style.backgroundColor = `rgba(${convertRGB(
+			tertiaryColor,
+			false,
+		).toString()})`
 
-    textColorEl.style.backgroundColor = `rgba(${convertRGB(
-      textColor,
-      false
-    ).toString()})`;
+		textColorEl.style.backgroundColor = `rgba(${convertRGB(
+			textColor,
+			false,
+		).toString()})`
 
-    trainingData.push({
-      input: match,
-      output: [1],
-    });
+		ai.trainingData.push({
+			input: match,
+			output: [1],
+		})
 
-    return;
-  }
+		return
+	}
 
   generate();
 };
 
-generateButton.addEventListener("click", () => generate());
+generateButton.addEventListener("click", generate);
 
 saveButton.addEventListener("click", () => {
   // remove match for modification
-  trainingData.pop();
+  ai.trainingData.pop();
 
   // push match to trainingData
-  trainingData.push({
+  ai.trainingData.push({
     input: match,
     output: [1],
   });
 
 
-  console.log("trainingData", trainingData);
+  console.log("trainingData", ai.trainingData);
 });
 
 generate();
