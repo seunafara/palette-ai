@@ -1,5 +1,6 @@
 import AI from './AI.js';
-import trainingData from "./trainingData.js"
+import { convertRGB, shuffle, randomInt } from "./helpers.js"
+import { tertiaryColors, textColors, trainingData } from "./constants.js"
 
 const ai = new AI(trainingData).train()
 
@@ -12,73 +13,15 @@ const textColorEl = document.getElementById("text-color");
 const generateButton = document.getElementById("generate-btn");
 const saveButton = document.getElementById("save-btn");
 
-function randomColor(min = 0, max = 255) {
-  // min and max included
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function shuffle(array) {
-  let currentIndex = array.length,
-    randomIndex;
-
-  // While there remain elements to shuffle.
-  while (currentIndex != 0) {
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
-}
-
-const convertRGB = (color, toNum = false) => {
-  let item = color;
-
-  if (typeof color !== "string") {
-    item = color.toString();
-  }
-
-  return item.split(",").map((number) => {
-    const formattedNum = Number(number);
-    if (toNum) {
-      return formattedNum / 255;
-    }
-    return formattedNum * 255;
-  });
-};
-
-const tertiaryColors = [
-  "240, 255, 0",
-  "139,105,20",
-  "149, 165, 166",
-  "245, 245, 220",
-  "0 0 0",
-  "0,255,0",
-  "128,0,128",
-  "254,251,234",
-  "255,192,203",
-  "255,69,0",
-  "5,195,221",
-  "255 255 255"
-];
-
-const textColors = ["0, 0, 0", "255, 255, 255"];
-
 let match;
 
 const generate = () => {
   const redShade = convertRGB(
-    `255, ${randomColor(0, 255)}, ${randomColor(0, 255)}`,
+    `255, ${randomInt()}, ${randomInt()}`,
     true
   );
   const blueShade = convertRGB(
-    `${randomColor(0, 255)}, ${randomColor(0, 255)}, 255`,
+    `${randomInt()}, ${randomInt()}, 255`,
     true
   );
 
