@@ -30,7 +30,7 @@ const generate = () => {
 
   const [primaryColor, secondaryColor] = shuffle([redShade, blueShade]);
 
-  match = [...primaryColor, ...secondaryColor, ...tertiaryColor, ...textColor];
+  match = [primaryColor, secondaryColor, tertiaryColor, textColor].flat()
 
   const guess = ai.net.run(match)[0];
 
