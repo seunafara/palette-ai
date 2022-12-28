@@ -32,7 +32,14 @@ const generate = () => {
 
   match = [primaryColor, secondaryColor, tertiaryColor, textColor].flat()
 
-  const guess = ai.net.run(match)[0];
+  
+  if(match.length < 12) {
+    // We always want a size of 12
+    return generate()
+  }
+  const guess = ai.train(ai.trainingData).net.run(match)[0];
+
+  // console.log(guess)
 
   if (guess > 0.5) {
 		primaryColorEl.style.backgroundColor = `rgba(${convertRGB(
@@ -69,14 +76,14 @@ const generate = () => {
 generateButton.addEventListener("click", generate);
 
 saveButton.addEventListener("click", () => {
-  // remove match for modification
-  ai.trainingData.pop();
+  // Remove and modify last queued 
+  const current = ai.trainingData.pop();
 
   // push match to trainingData
   ai.trainingData.push({
-    input: match,
-    output: [1],
-  });
+		input: current.input,
+		output: [1],
+	})
 
 
   console.log("trainingData", ai.trainingData);
