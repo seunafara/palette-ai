@@ -76,7 +76,7 @@ const generate = () => {
 generateButton.addEventListener("click", generate);
 
 saveButton.addEventListener("click", () => {
-  // Remove and modify last queued 
+  // Remove and modify last item in stack 
   const current = ai.trainingData.pop();
 
   // push match to trainingData
