@@ -13,7 +13,7 @@ If you come across a generated palette that you like, you can save it by clickin
 - Store saved training data in browser `localStorage` or `IndexDB`
 - Copy and paste matching color palettes
 
-This tool is an experimental for building AI models using JS
+This is an experimental tool for building AI models using JS
 
 
 
