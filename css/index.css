@@ -16,14 +16,17 @@ body {
 
 #primary-color {
   background-color: rgba(255, 154, 55);
+  border-right: 3px solid white;
 }
 
 #secondary-color {
   background-color: rgba(107, 49, 255);
+  border-right: 3px solid white;
 }
 
 #tertiary-color {
   background-color: rgba(128, 0, 128);
+  border-right: 3px solid white;
 }
 
 #text-color {
