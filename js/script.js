@@ -14,6 +14,8 @@ const generateButton = document.getElementById("generate-btn");
 const saveButton = document.getElementById("save-btn");
 
 let match;
+const tracked = []
+const saved = []
 
 const generate = () => {
   const redShade = convertRGB(
@@ -33,13 +35,12 @@ const generate = () => {
   match = [primaryColor, secondaryColor, tertiaryColor, textColor].flat()
 
   
-  if(match.length < 12) {
-    // We always want a size of 12
+  if(match.length !== 12) {
     return generate()
   }
-  const guess = ai.train(ai.trainingData).net.run(match)[0];
+  const guess = ai.net.run(match)[0];
 
-  // console.log(guess)
+  console.log("guess ", guess)
 
   if (guess > 0.5) {
 		primaryColorEl.style.backgroundColor = `rgba(${convertRGB(
@@ -62,7 +63,7 @@ const generate = () => {
 			false,
 		).toString()})`
 
-		ai.trainingData.push({
+		tracked.push({
 			input: match,
 			output: [1],
 		})
@@ -77,16 +78,19 @@ generateButton.addEventListener("click", generate);
 
 saveButton.addEventListener("click", () => {
   // Remove and modify last item in stack 
-  const current = ai.trainingData.pop();
+  const current = tracked.pop();
 
   // push match to trainingData
-  ai.trainingData.push({
+  saved.push({
 		input: current.input,
 		output: [1],
 	})
 
+  ai.train([...ai.trainingData, ...saved])
 
-  console.log("trainingData", ai.trainingData);
+
+  console.log("tracked Data ", tracked);
+  console.log("saved Data ", saved);
 });
 
 generate();
