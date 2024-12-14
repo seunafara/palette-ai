@@ -13,7 +13,5 @@ If you come across a generated palette that you like, you can save it by clickin
 
 This is an experimental tool for building AI models using JS
 
-
-
-
-
+# Screenshot
+<img width="1792" alt="Screenshot 2024-12-14 at 3 32 44 PM" src="https://github.com/user-attachments/assets/f0e5b4e6-5adc-4487-b9f4-7e2f345349ba" />
