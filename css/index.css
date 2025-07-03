@@ -45,7 +45,7 @@ body {
 .glass-container {
   text-transform: uppercase;
   position: relative;
-  height: 20%;
+  height: 10%;
   width: 100%;
   z-index: 10;
   background-attachment: fixed;
@@ -55,7 +55,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   color: white;
-  font-size: 48px;
+  font-size: 14px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -70,7 +70,7 @@ body {
 
 #control-panel {
   position: absolute;
-  bottom: 17%;
+  bottom: 5%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 16px 28px;
@@ -95,4 +95,40 @@ body {
   color: #fff;
   font-size: 18px !important;
   border-radius: 24px;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .glass-container {
+
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .glass-container {
+    font-size: 32px;
+    height: 15%;
+  }
+  #control-panel {
+    bottom: 17%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .glass-container {
+    font-size: 48px;
+    height: 20%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .glass-container {}
 }
