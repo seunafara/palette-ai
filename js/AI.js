@@ -6,7 +6,7 @@ class AI {
 
   train(data) {
     this.net.train(data || this.trainingData)
-    return this
+    return this.net
   }
 }
 
