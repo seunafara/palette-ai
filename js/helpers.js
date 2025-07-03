@@ -39,8 +39,25 @@ function convertRGB(color, toNum = false) {
   })
 }
 
+/**
+ * Source - https://stackoverflow.com/questions/49974145/how-to-convert-rgba-to-hex-color-code-using-javascript
+ */
+
+function rgb_any_to_hex(rgba, forceRemoveAlpha = false) {
+  return "#" + rgba.replace(/^rgba?\(|\s+|\)$/g, '') // Get's rgba / rgb string values
+    .split(',') // splits them at ","
+    .filter((string, index) => !forceRemoveAlpha || index !== 3)
+    .map(string => parseFloat(string)) // Converts them to numbers
+    .map((number, index) => index === 3 ? Math.round(number * 255) : number) // Converts alpha to 255 number
+    .map(number => number.toString(16)) // Converts numbers to hex
+    .map(string => string.length === 1 ? "0" + string : string) // Adds 0 when length of one number is 1
+    .join("") // Puts the array to togehter to a string
+}
+
+
 export {
   convertRGB,
   randomInt,
   shuffle,
+  rgb_any_to_hex
 }

@@ -1,14 +1,18 @@
 import AI from "./AI.js"
-import { convertRGB, shuffle, randomInt } from "./helpers.js"
+import { convertRGB, shuffle, randomInt, rgb_any_to_hex } from "./helpers.js"
 import { tertiaryColors, textColors, trainingData } from "./constants.js"
 
 let ai = new AI(trainingData).train()
 
 const HTML_ELEMENTS = {
   primaryColor: document.getElementById("primary-color"),
+  primaryColorText: document.getElementById("primary-color-text"),
+  secondaryColorText: document.getElementById("secondary-color-text"),
   secondaryColor: document.getElementById("secondary-color"),
   tertiaryColor: document.getElementById("tertiary-color"),
+  tertiaryColorText: document.getElementById("tertiary-color-text"),
   textColor: document.getElementById("text-color"),
+  textColorText: document.getElementById("text-color-text"),
   generateButton: document.getElementById("generate-btn"),
   saveButton: document.getElementById("save-btn")
 }
@@ -54,29 +58,37 @@ const generate = () => {
   console.log("guess ", guess)
 
   if (guess > 0.7) {
-    HTML_ELEMENTS.primaryColor.style.backgroundColor = `rgba(${convertRGB(
+    const primaryColorRgb = convertRGB(
       primaryColor,
       false,
-    ).toString()})`
+    ).toString()
+    HTML_ELEMENTS.primaryColor.style.backgroundColor = `rgba(${primaryColorRgb})`
+    HTML_ELEMENTS.primaryColorText.innerHTML = rgb_any_to_hex(primaryColorRgb)
 
-    HTML_ELEMENTS.secondaryColor.style.backgroundColor = `rgba(${convertRGB(
+    const secondaryColorRgb = convertRGB(
       secondaryColor,
       false,
-    ).toString()})`
+    ).toString()
+    HTML_ELEMENTS.secondaryColor.style.backgroundColor = `rgba(${secondaryColorRgb})`
+    HTML_ELEMENTS.secondaryColorText.innerHTML = rgb_any_to_hex(secondaryColorRgb)
 
-    HTML_ELEMENTS.tertiaryColor.style.backgroundColor = `rgba(${convertRGB(
+    const tertiaryColorRgb = convertRGB(
       tertiaryColor,
       false,
-    ).toString()})`
+    ).toString()
+    HTML_ELEMENTS.tertiaryColor.style.backgroundColor = `rgba(${tertiaryColorRgb})`
+    HTML_ELEMENTS.tertiaryColorText.innerHTML = rgb_any_to_hex(tertiaryColorRgb)
 
-    HTML_ELEMENTS.textColor.style.backgroundColor = `rgba(${convertRGB(
+    const textColorRgb = convertRGB(
       textColor,
       false,
-    ).toString()})`
+    ).toString()
+    HTML_ELEMENTS.textColor.style.backgroundColor = `rgba(${textColorRgb})`
+    HTML_ELEMENTS.textColorText.innerHTML = rgb_any_to_hex(textColorRgb)
 
     tracked.push({
       input: match,
-      output: [1],
+      output: [0],
     })
 
     return
@@ -104,7 +116,7 @@ HTML_ELEMENTS.saveButton.addEventListener("click", () => {
       hiddenLayers: [3],
       activation: 'sigmoid'
     },
-    trainingData: saved,
+    trainingData: [...tracked, ...saved],
   })
 
   console.log("tracked Data ", tracked)
