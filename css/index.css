@@ -17,21 +17,18 @@ body {
 #primary-color {
   position: relative;
   background-color: rgba(255, 154, 55);
-  border-right: 3px solid white;
   display: flex;
   align-items: end;
 }
 
 #secondary-color {
   background-color: rgba(107, 49, 255);
-  border-right: 3px solid white;
   display: flex;
   align-items: end;
 }
 
 #tertiary-color {
   background-color: rgba(128, 0, 128);
-  border-right: 3px solid white;
   display: flex;
   align-items: end;
 }
