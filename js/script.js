@@ -41,7 +41,7 @@ const generate = () => {
   const redShade = convertRGB(`255, ${randomInt()}, ${randomInt()}`, true)
   const blueShade = convertRGB(`${randomInt()}, ${randomInt()}, 255`, true)
 
-  const tertiaryColor = convertRGB(shuffle(tertiaryColors)[0], true)
+  const tertiaryColor = convertRGB(`${randomInt()}, ${randomInt()}, ${randomInt()}`, true)
   const textColor = convertRGB(shuffle(textColors)[0], true)
 
   const [primaryColor, secondaryColor] = shuffle([redShade, blueShade])
